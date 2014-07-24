@@ -41,17 +41,21 @@ function Gpio(gpio, direction, edge, options) {
     options = options || {};
 
     this.gpio = gpio;
-    this.gpioPath = gpioRootPath + 'gpio' + this.gpio + '/';
     this.opts = {};
     this.opts.debounceTimeout = options.debounceTimeout || 0;
     this.readBuffer = new Buffer(16);
     this.listeners = [];
 
+    this.gpioPath = this.getPath(gpioRootPath, this.gpio);
     valuePath = this.gpioPath + 'value';
 
-    if (!fs.existsSync(this.gpioPath)) {
+    if (!this.gpioPath) {
         // The pin hasn't been exported yet so export it.
-        fs.writeFileSync(gpioRootPath + 'export', this.gpio);
+        this.exportPin(gpioRootPath);
+        // Since the file didn't exist previously, the paths needs to be updated
+        this.gpioPath = this.getPath(gpioRootPath, this.gpio);
+        valuePath = this.gpioPath + 'value';
+
         fs.writeFileSync(this.gpioPath + 'direction', direction);
         if (edge) {
             fs.writeFileSync(this.gpioPath + 'edge', edge);
@@ -92,6 +96,30 @@ function Gpio(gpio, direction, edge, options) {
     this.poller = new Epoll(pollerEventHandler.bind(this));
 }
 exports.Gpio = Gpio;
+
+/**
+    Check if the GPIO Pin Has Been Exported, gets the path for the gpio pin if it exists
+**/
+Gpio.prototype.getPath = function (rootPath, gpio) {
+    var devices = fs.readdirSync(rootPath);                                                         
+    var gpioPin = 'gpio' + gpio;                                                                    
+    var re = new RegExp("^" + gpioPin + ".*");                                                      
+    for (i in devices) {                                                                            
+        var device = devices[i];                                                                      
+        if (device.match(re)) {                                                                       
+            return gpioRootPath + device + '/';                                                         
+        }                                                                                             
+    }
+    return false;                                                      
+}
+
+/**
+    Exports the GPIO Pin
+**/
+Gpio.prototype.exportPin = function (rootPath) {
+    fs.writeFileSync(rootPath + 'export', this.gpio);
+}
+
 
 /**
  * Read GPIO value asynchronously.
