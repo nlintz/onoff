@@ -1,5 +1,5 @@
 {
-  "name": "onoff",
+  "name": "tm-onoff",
   "version": "0.3.2",
   "description": "GPIO access and interrupt detection on the BeagleBone or Raspberry Pi",
   "main": "onoff.js",
@@ -35,6 +35,9 @@
   ],
   "author": "fivdi",
   "license": "MIT",
-  "gypfile": true
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/fivdi/onoff/issues"
+  },
+  "homepage": "https://github.com/fivdi/onoff"
 }
-
