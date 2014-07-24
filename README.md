@@ -46,7 +46,7 @@ When the button is pressed the LED should trun on, when it's released the LED
 should turn off. This can be acheived with the following code:
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
@@ -75,7 +75,7 @@ ctrl-c gracefully and bails out on error. The resources used by the led and
 button Gpio objects are released by calling their unexport method.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
@@ -134,7 +134,7 @@ to the onoff Gpio constructor when using pin P1_11 on the P1 expansion header.
 Blink the LED on GPIO #17 for 5 seconds:
 
 ```js
-var Gpio = require('onoff').Gpio, // Constructor function for Gpio objects.
+var Gpio = require('tm-onoff').Gpio, // Constructor function for Gpio objects.
     led = new Gpio(17, 'out'),    // Export GPIO #17 as an output.
     iv;
 
@@ -157,7 +157,7 @@ setTimeout(function() {
 Blink the LED on GPIO #17 for 5 seconds:
 
 ```js
-var Gpio = require('onoff').Gpio, // Constructor function for Gpio objects.
+var Gpio = require('tm-onoff').Gpio, // Constructor function for Gpio objects.
     led = new Gpio(17, 'out');    // Export GPIO #17 as an output.
 
 // Toggle the state of the LED on GPIO #17 every 200ms 'count' times.
@@ -237,7 +237,7 @@ automatically change the access permissions for the GPIO value files giving
 all users read and write access.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 ```
@@ -253,7 +253,7 @@ initial led/button example, the applications exit function does not attempt
 to unexport the GPIOs when it terminates.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
@@ -275,7 +275,7 @@ After the application has terminated, a third program can be executed by the
 superuser to unexport the appropriate GPIOs.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
@@ -307,7 +307,7 @@ unlike the initial led/button example, the applications exit function does
 not attempt to unexport the GPIOs when it terminates.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
@@ -356,7 +356,7 @@ unlike the initial led/button example, the applications exit function does
 not attempt to unexport the GPIOs when it terminates.
 
 ```js
-var Gpio = require('onoff').Gpio,
+var Gpio = require('tm-onoff').Gpio,
     led = new Gpio(17, 'out'),
     button = new Gpio(18, 'in', 'both');
 
